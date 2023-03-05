@@ -6,8 +6,8 @@ public class User {
 
     public User createUser(String login, String email) {
         if (login != null && !login.isEmpty() && email != null && !email.isEmpty()) {
-            User unit = new User(login, email);
-            return unit;
+            User user = new User(login, email);
+            return user;
         }
         throw new IllegalArgumentException();
     }
@@ -19,6 +19,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override

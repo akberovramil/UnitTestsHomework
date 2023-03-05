@@ -12,25 +12,26 @@ class UserTest {
     @Test
     public void shouldCreateUserWithTwoPar() throws IllegalAccessException {
         User result = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
-        Assertions.assertTrue(result.equals(new User(DEFAULT_LOGIN,DEFAULT_EMAIL)));
+        Assertions.assertTrue(result.getLogin().equals(DEFAULT_LOGIN) && result.getEmail().equals(DEFAULT_EMAIL));
 
     }
 
     @Test
     public void shouldCreateUserNoPar() {
-        User result = out.createUser(DEFAULT_LOGIN,DEFAULT_EMAIL);
-        Assertions.assertFalse(!result.equals(new User(DEFAULT_LOGIN,DEFAULT_EMAIL)));
+        User result = new User();
+        Assertions.assertTrue(result.getLogin() == null && result.getEmail() == null);
     }
 
     @Test
     public void shouldCorrectEmail() {
-        String email = DEFAULT_EMAIL;
-        Assertions.assertTrue(email.contains("@") && email.contains("."));
+        User result = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
+        Assertions.assertTrue(result.getEmail().contains("@") && result.getEmail().contains("."));
     }
 
     @Test
     public void shouldLoginAndEmailNotEquals() {
-        Assertions.assertFalse(DEFAULT_EMAIL.equals(DEFAULT_LOGIN));
+        User result = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
+        Assertions.assertNotEquals(result.getLogin(), result.getEmail());
     }
 
 
