@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
@@ -8,30 +9,34 @@ class UserTest {
 
     private final User out = new User(DEFAULT_LOGIN,DEFAULT_EMAIL);
 
+    User user;
+
+    @BeforeEach
+    void prepareData() {
+        user = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
+    }
+
 
     @Test
     public void shouldCreateUserWithTwoPar() throws IllegalAccessException {
-        User result = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
-        Assertions.assertTrue(result.getLogin().equals(DEFAULT_LOGIN) && result.getEmail().equals(DEFAULT_EMAIL));
+        Assertions.assertTrue(user.getLogin().equals(DEFAULT_LOGIN) && user.getEmail().equals(DEFAULT_EMAIL));
 
     }
 
     @Test
     public void shouldCreateUserNoPar() {
-        User result = new User();
-        Assertions.assertTrue(result.getLogin() == null && result.getEmail() == null);
+        user = new User();
+        Assertions.assertTrue(user.getLogin() == null && user.getEmail() == null);
     }
 
     @Test
     public void shouldCorrectEmail() {
-        User result = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
-        Assertions.assertTrue(result.getEmail().contains("@") && result.getEmail().contains("."));
+        Assertions.assertTrue(user.getEmail().contains("@") && user.getEmail().contains("."));
     }
 
     @Test
     public void shouldLoginAndEmailNotEquals() {
-        User result = out.createUser(DEFAULT_LOGIN, DEFAULT_EMAIL);
-        Assertions.assertNotEquals(result.getLogin(), result.getEmail());
+        Assertions.assertNotEquals(user.getLogin(), user.getEmail());
     }
 
 
